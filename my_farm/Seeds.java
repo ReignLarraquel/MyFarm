@@ -30,7 +30,7 @@ public class Seeds {
       this.produceMax = produceMax;
    }
 
-   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, int seedCost, int basePrice, int expEarned, int produceMin) {
+   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, int seedCost, int basePrice, double expEarned, int produceMin) {
       this.seedName = seedName;
       this.cropType = cropType;
       this.harvestTime = harvestTime;
