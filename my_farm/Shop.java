@@ -21,13 +21,18 @@ public class Shop {
 
    
    //this method is to buy seeds
-   public void buySeeds(Farmer farmer, String seedName) {
+   public void buySeeds(Farmer farmer, String seedName, Farm farm) {
+
+
       for (Seeds seed : this.seeds) {
          if (seedName == seed.getSeedName()) {
             if (farmer.getObjectCoins() >= seed.getSeedCost()) {
                farmer.setObjectCoins(farmer.getObjectCoins() - seed.getSeedCost());
                farmer.addSeeds(seed);
                System.out.println("You have bought " + seed.getSeedName() + " seeds.");
+               
+
+               farm.plantSeed(seed);
             } else {
                System.out.println("You do not have enough coins to buy " + seed.getSeedName() + " seeds.");
             }
