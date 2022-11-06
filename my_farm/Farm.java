@@ -55,12 +55,13 @@ public class Farm {
       tiles[x][y] = tile;
    }
 
-   public void checkTileState(int x, int y) {
+   public String checkTileState(int x, int y) {
       for(Tiles tile : tileList) {
          if(tile.getX() == x && tile.getY() == y) {
-            System.out.println(tile.getTileState());
+            return tile.getTileState();
          }
       }
+      return null;
    }
 
    public static void changeTileState(int x, int y, String tileState) {
@@ -71,28 +72,29 @@ public class Farm {
       }
    }
 
-   public void plantSeed(Seeds seed) {
+   public int plantSeed(Seeds seed) {
       Scanner input = new Scanner(System.in);
       int x;
       int y;
 
       System.out.println("Where would you like to plant your " + seed.getSeedName() + " seeds?");
-      System.out.println("X: ");
+      System.out.print("X: ");
       x = input.nextInt();
-      System.out.println("Y: ");
+      System.out.print("Y: ");
       y = input.nextInt();
-      //if(Farm.getTileState(x, y).equals("Unplowed")) { //Fix to check tileState if plowed
-            Farm.setTile(x, y, "[v]");
-            Farm.changeTileState(x, y, "Planted");
+      if(checkTileState(x, y) == "Plowed") { //Fix to check tileState if plowed
+         Farm.setTile(x, y, "[v]");
+         Farm.changeTileState(x, y, "Planted");
 
-            for(Tiles tile : Farm.tileList) { //This may or may not be error but too lazy to checkS
-               if(tile.getX() == x && tile.getY() == y) {
-                  tile.setSeed(seed);
-               }
+         for(Tiles tile : Farm.tileList) { //This may or may not be error but too lazy to checkS
+            if(tile.getX() == x && tile.getY() == y) {
+               tile.setSeed(seed);
             }
-      //}
+         }
+         return 1;
+      }
 
-
+      return 0;
    }
 
 }
