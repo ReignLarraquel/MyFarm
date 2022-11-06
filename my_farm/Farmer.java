@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Farmer {
    private String name;
-   private int objectCoins;
+   private double objectCoins;
    private Level level;
    private ArrayList<Seeds> seeds;
 
@@ -15,11 +15,11 @@ public class Farmer {
       this.seeds = new ArrayList<Seeds>();
    }
 
-   public int getObjectCoins() {
+   public double getObjectCoins() {
       return objectCoins;
    }
 
-   public void setObjectCoins(int objectCoins) {
+   public void setObjectCoins(double objectCoins) {
       this.objectCoins = objectCoins;
    }
 
