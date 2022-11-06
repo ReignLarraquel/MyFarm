@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Main {
    public static int gameStatus = 0;
-   public static int day = 1;
+   public static int day = 0;
 
    public static void menu(){
       Scanner input = new Scanner(System.in);
-      day = 1;
+      day = 0;
 
       System.out.println("Welcome to the Farm!\n");
       System.out.print("[1] Start a new Game\n[2] Exit Game\n\nEnter your choice: ");
@@ -40,64 +40,72 @@ public class Main {
       String name;
 
       //Setup Map:
+      Game game = new Game();
       Shop shop = new Shop();
       UseItem useItem = new UseItem();
       int choice = 0;
       int buy = 0;
+      int advanceDay = 2;
+      int x;
+      int y;
 
       Scanner input = new Scanner(System.in);
 
-      menu();
-      farmer = new Farmer(monologue());
+      gameStatus = game.menu();
+      farmer = new Farmer(game.monologue());
 
       while(gameStatus == 1){
-         System.out.println("\n[" + farmer.getName().toUpperCase() + "'s farm]");
-         System.out.println("\nDay " + day);
-         System.out.println("Level: " + farmer.getLevel() + "\t\tCoins: " + farmer.getObjectCoins() + "\nEXP: " + farmer.getExp());
-         farm.displayFarm();
-         System.out.println("\nACTION:\n [1]Use Tools\t\t[3]Harvest\n [2]Shop\t\t[4]Exit");
-         choice = input.nextInt();
-         
-         if(choice == 1){
-            System.out.println("\nTOOLS:\n [1]Plow\t\t [4]Pickaxe\n [2]Watering Can\t [5]Shovel\n [3]Fertilizer");
-            choice = input.nextInt();
+         game.setDay(game.getDay() + 1);;
+         advanceDay = 2;
 
-            System.out.println("\n" + useItem.getTools().get(choice - 1).getToolName().toUpperCase());
-            System.out.println("Enter the coordinates of the tile you wish to use the tool: ");
-            System.out.print("X: ");
-            int x = input.nextInt();
-            System.out.print("Y: ");
-            int y = input.nextInt();
+         while(advanceDay == 2){
 
-            switch(choice){
-               case 1:
-                  useItem.use(farmer, "Plow", x, y);
-                  break;
-               case 2:
-                  useItem.use(farmer, "Watering Can", x, y);
-                  break;
-               case 3:
-                  useItem.use(farmer, "Fertilizer", x, y);
-                  break;
-               case 4:
-              useItem.use(farmer, "Pickaxe", x, y);
-                  break;
-               case 5:
-                  useItem.use(farmer, "Shovel", x, y);
-                  break;
+            game.header(farmer, farm);
+
+            if(game.gameOver(farm) == 1) {
+               gameStatus = 2;
+               advanceDay = 1;
+               System.out.println("\nAll your plants have withered...\n\n[YOU LOSE]");
+            }
+            else{
+               choice = game.footer();
+               
+               if(choice == 1){
+                  useItem.toolMenu(choice, farmer);
+                  
+                  advanceDay = game.advanceDay();
+               }
+               if(choice == 2){
+                  shop.displayShop();
+                  buy = input.nextInt();
+                  shop.buySeeds(farmer, buy - 1, farm, game.getDay());
+   
+                  advanceDay = game.advanceDay();
+               }
+               if(choice == 3){
+                  System.out.println("Enter the coordinates of the tile you wish to harvest: ");
+                  System.out.print("X: ");
+                  x = input.nextInt();
+                  System.out.print("Y: ");
+                  y = input.nextInt();
+   
+                  farm.harvestPlant(farmer, x, y, game.getDay());
+   
+                  advanceDay = game.advanceDay();
+               }
+               if(choice == 4){
+                  advanceDay = 1;
+               }
+               if(choice == 5) {
+                  menu();
+                  advanceDay = 1;
+                  if(gameStatus == 1) farmer = new Farmer(monologue());
+               }
+   
             }
          }
-         if(choice == 2){
-            shop.displayShop();
-            buy = input.nextInt();
-            shop.buySeeds(farmer, buy - 1, farm);
-         }
-         if(choice == 4) {
-            menu();
-            if(gameStatus == 1) farmer = new Farmer(monologue());
-         }
 
-         day++;
+
       }
    }
 }
