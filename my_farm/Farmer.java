@@ -9,6 +9,7 @@ public class Farmer {
    private ArrayList<Seeds> seeds;
 
    public Farmer(String name) {
+      this.name = name;
       this.objectCoins = 100;
       this.level = new Level(0, 0);
       this.seeds = new ArrayList<Seeds>();
@@ -30,8 +31,11 @@ public class Farmer {
       this.name = name;
    }
 
-   public Level getLevel() {
-      return level;
+   public int getLevel() {
+      return level.getLevel();
+   }
+   public double getExp(){
+      return level.getExp();
    }
 
    public void setLevel(int level, double exp) {
