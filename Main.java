@@ -24,7 +24,7 @@ public class Main {
       System.out.println("What is your name?");
       name = input.next();
 
-      System.out.print("\nHello " + name + ".\nWell, what do you think? This was your grandpa's farm. (Enter to continue)");
+      System.out.print("\nHello " + name + "!\nWell, what do you think? This was your grandpa's farm. (Enter to continue)");
       key.nextLine();
       System.out.print("It's been neglected for quite some time, but I'm sure you can bring it back to life. (Enter to continue)");
       key.nextLine();
@@ -90,7 +90,7 @@ public class Main {
          if(choice == 2){
             shop.displayShop();
             buy = input.nextInt();
-            shop.buySeeds(farmer, buy, farm);
+            shop.buySeeds(farmer, buy - 1, farm);
          }
          if(choice == 4) {
             menu();
