@@ -8,8 +8,7 @@ package my_farm;
  * Withered:   […]
 */
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Farm {
    private static String[][] tiles;
@@ -72,7 +71,7 @@ public class Farm {
       }
    }
 
-   public int plantSeed(Seeds seed) {
+   public int plantSeed(Seeds seed, int currentDay) {
       Scanner input = new Scanner(System.in);
       int x;
       int y;
@@ -88,7 +87,7 @@ public class Farm {
 
          for(Tiles tile : Farm.tileList) { //This may or may not be error but too lazy to checkS
             if(tile.getX() == x && tile.getY() == y) {
-               tile.setSeed(seed);
+               tile.setSeed(seed, currentDay);
             }
          }
          return 1;
@@ -97,4 +96,73 @@ public class Farm {
       return 0;
    }
 
+   public static void waterPlant(Farmer farmer, int x, int y) {
+      for(Tiles tile : Farm.tileList) {
+         if(tile.getX() == x && tile.getY() == y) {
+            if(tile.getTileState() == "Planted") {
+               tile.setWaterCount(1);
+               System.out.println("You watered the plant " + tile.getWaterCount() + " times.");
+            } else {
+               System.out.println("There is no plant to water.");
+            }
+
+         }
+      }
+   }
+
+   public void checkHarvestDay(int currentDay) {
+      for(Tiles tile : Farm.tileList) {
+         if(tile.getTileState() == "Planted") {
+            if(tile.getDayOfHarvest() == currentDay) {
+               if(tile.getWaterCount() >= tile.getSeed().getWaterNeed()){
+                  System.out.println("\n  - Your " + tile.getSeed().getSeedName() + " is ready to harvest!");
+                  Farm.changeTileState(tile.getX(), tile.getY(), "Must Harvest");
+                  Farm.setTile(tile.getX(), tile.getY(), "[Y]");
+               }
+               else{
+                  Farm.changeTileState(tile.getX(), tile.getY(), "Withered");
+                  Farm.setTile(tile.getX(), tile.getY(), "[…]");
+                  System.out.println("\n  - Your " + tile.getSeed().getSeedName() + " crop has withered.");
+               }
+            }
+         }
+      }
+   }
+
+   public void harvestPlant(Farmer farmer, int x, int y, int currentDay) {
+      double harvestTotal = 0;
+      double finalTotal = 0;
+      double waterBonus = 0;
+      int produce;
+
+      for(Tiles tile : Farm.tileList) {
+         if(tile.getX() == x && tile.getY() == y) {
+            if(tile.getTileState() == "Must Harvest") {
+               produce = tile.getSeed().generateProduce();
+               tile.setTileState("Unplowed");
+               Farm.setTile(x, y, "[ ]");
+               tile.setWaterCount(0);
+               tile.setDayOfHarvest(0);
+               System.out.println("You harvested " + produce + tile.getSeed().getSeedName() + "s!");
+
+               harvestTotal = produce * (tile.getSeed().getBasePrice() + 0); //Temporarily set to 0
+               waterBonus = harvestTotal * 0.2 * (tile.getWaterCount() -1);
+               finalTotal = harvestTotal + waterBonus;
+               farmer.setObjectCoins(farmer.getObjectCoins() + finalTotal);
+               System.out.println("You earned " );
+               
+            }
+            else if(tile.getTileState() == "Planted") {
+               System.out.println("Your plant is not ready to harvest yet.");
+            }
+            else if(tile.getTileState() == "Withered")  {
+               System.out.println("This has already withered.");
+            }
+            else if(tile.getTileState() == "Plowed" || tile.getTileState() == "Unplowed") {
+               System.out.println("There is no plant to harvest.");
+            }
+         }
+      }
+   }
+   
 }
