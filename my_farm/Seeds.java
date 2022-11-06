@@ -9,13 +9,13 @@ public class Seeds {
    private int waterBonus;
    private int fertilizerNeed;
    private int fertilizerBonus;
-   private int seedCost;
+   private double seedCost;
    private int basePrice;
    private double expEarned;
    private int produceMin;
    private int produceMax;
 
-   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, int seedCost, int basePrice, double expEarned, int produceMin, int produceMax) {
+   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, double seedCost, int basePrice, double expEarned, int produceMin, int produceMax) {
       this.seedName = seedName;
       this.cropType = cropType;
       this.harvestTime = harvestTime;
@@ -30,7 +30,7 @@ public class Seeds {
       this.produceMax = produceMax;
    }
 
-   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, int seedCost, int basePrice, double expEarned, int produceMin) {
+   public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, double seedCost, int basePrice, double expEarned, int produceMin) {
       this.seedName = seedName;
       this.cropType = cropType;
       this.harvestTime = harvestTime;
@@ -105,11 +105,11 @@ public class Seeds {
       this.fertilizerBonus = fertilizerBonus;
    }
 
-   public int getSeedCost() {
+   public double getSeedCost() {
       return seedCost;
    }
 
-   public void setSeedCost(int seedCost) {
+   public void setSeedCost(double seedCost) {
       this.seedCost = seedCost;
    }
 
