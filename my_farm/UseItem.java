@@ -20,6 +20,7 @@ public class UseItem {
          if (toolName == tool.getToolName()) {
             if (farmer.getObjectCoins() >= tool.getUsageCost()) {
                farmer.setObjectCoins(farmer.getObjectCoins() - tool.getUsageCost());
+               farmer.setLevel(farmer.getLevel(), farmer.getExp() + tool.getExpEarned());
                
                switch(toolName) {
                   case "Plow":
@@ -48,4 +49,13 @@ public class UseItem {
          }
       }
    }
+
+   public ArrayList<Tools> getTools() {
+      return tools;
+   }
+
+   public void setTools(ArrayList<Tools> tools) {
+      this.tools = tools;
+   }
+
 }
