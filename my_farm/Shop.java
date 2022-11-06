@@ -27,11 +27,18 @@ public class Shop {
       for (Seeds seed : this.seeds) {
          if (seeds.get(index) == seed) {
             if (farmer.getObjectCoins() >= seed.getSeedCost()) {
+               if (farm.plantSeed(seed) == 1){
                farmer.setObjectCoins(farmer.getObjectCoins() - seed.getSeedCost());
+               farmer.setLevel(farmer.getLevel(), farmer.getExp() + seed.getExpEarned());
                farmer.addSeeds(seed);
-               System.out.println("You have bought " + seed.getSeedName() + " seeds.");
-               farm.plantSeed(seed);
-            } else {
+               System.out.println("You have bought " + seed.getSeedName() + " seeds.");       
+               System.out.println("You have planted your " + seed.getSeedName() + " seeds!");           
+               }
+               else{
+                  System.out.println("You cannot plant your " + seed.getSeedName() + " seeds here!\nYou must plow the land first!");
+               }
+            } 
+            else {
                System.out.println("You do not have enough coins to buy " + seed.getSeedName() + " seeds.");
             }
          }
