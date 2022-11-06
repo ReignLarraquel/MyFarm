@@ -2,10 +2,10 @@ package my_farm;
 
 public class Tools {
    private String toolName;
-   private int usageCost;
+   private double usageCost;
    private double expEarned;
 
-   public Tools(String toolName, int usageCost, double expEarned) {
+   public Tools(String toolName, double usageCost, double expEarned) {
       this.toolName = toolName;
       this.usageCost = usageCost;
       this.expEarned = expEarned;
@@ -15,7 +15,7 @@ public class Tools {
       return this.toolName;
    }
 
-   public int getUsageCost() {
+   public double getUsageCost() {
       return this.usageCost;
    }
 
@@ -27,7 +27,7 @@ public class Tools {
       this.toolName = toolName;
    }
 
-   public void setUsageCost(int usageCost) {
+   public void setUsageCost(double usageCost) {
       this.usageCost = usageCost;
    }
 
