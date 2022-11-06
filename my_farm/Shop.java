@@ -8,7 +8,7 @@ public class Shop {
    public Shop() {
       this.seeds = new ArrayList<Seeds>();
 
-      this.seeds.add(new Seeds("Turnip", "Root crop", 2, 1, 2, 0, 1, 5, 6, 5, 1, 2));
+      this.seeds.add(new Seeds("Turnip", "Root crop", 2, 1, 2, 0, 1, 5.0, 6, 5, 1, 2));
       // this.seeds.add(new Seeds("Carrot", "Root crop", 3, 1, 2, 0, 1, 10, 9, 7.5, 1, 2));
       // this.seeds.add(new Seeds("Potato", "Root crop", 5, 3, 4, 1, 2, 20, 3, 12.5, 1, 10));
       // this.seeds.add(new Seeds("Rose", "Flower", 1, 1, 2, 0, 1, 5, 5, 2.5, 1));
@@ -21,13 +21,13 @@ public class Shop {
 
    
    //this method is to buy seeds
-   public void buySeeds(Farmer farmer, int index, Farm farm) {
+   public void buySeeds(Farmer farmer, int index, Farm farm, int currentDay) {
 
 
       for (Seeds seed : this.seeds) {
          if (seeds.get(index) == seed) {
             if (farmer.getObjectCoins() >= seed.getSeedCost()) {
-               if (farm.plantSeed(seed) == 1){
+               if (farm.plantSeed(seed, currentDay) == 1){
                farmer.setObjectCoins(farmer.getObjectCoins() - seed.getSeedCost());
                farmer.setLevel(farmer.getLevel(), farmer.getExp() + seed.getExpEarned());
                farmer.addSeeds(seed);
@@ -35,7 +35,7 @@ public class Shop {
                System.out.println("You have planted your " + seed.getSeedName() + " seeds!");           
                }
                else{
-                  System.out.println("You cannot plant your " + seed.getSeedName() + " seeds here!\nYou must plow the land first!");
+                  System.out.println("You cannot plant your " + seed.getSeedName() + " seeds here!");
                }
             } 
             else {
@@ -54,7 +54,7 @@ public class Shop {
       System.out.println("Here are the seeds you can buy:");
       int i = 1;
       for (Seeds seed : this.seeds) {
-         System.out.println("["+ i + "]" + seed.getSeedName() + " seeds: " + seed.getSeedCost() + " coins");
+         System.out.println("["+ i + "] " + seed.getSeedName() + " seeds: " + seed.getSeedCost() + " coins");
          i++;
       }
    }
