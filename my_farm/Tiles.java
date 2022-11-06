@@ -4,6 +4,9 @@ public class Tiles {
    private int y;
    private String tileState;  
    private Seeds seed;
+   private int waterCount;
+   private int fertilizerCount;
+   private int dayOfHarvest;
 
    public Tiles(int x, int y, String tileState) {
       this.x = x;
@@ -41,7 +44,36 @@ public class Tiles {
       return seed;
    }
 
-   public void setSeed(Seeds seed) {
+   public int getDayOfHarvest() {
+      return dayOfHarvest;
+   }
+
+   public void setDayOfHarvest(int day){
+      this.dayOfHarvest =  day;
+   }
+
+   public void setSeed(Seeds seed, int currentDay) {
       this.seed = seed;
+      this.dayOfHarvest = this.seed.getHarvestTime() + currentDay;
+   }
+
+   public int getWaterCount() {
+      return waterCount;
+   }
+
+   public void setWaterCount(int waterCount) {
+      this.waterCount += waterCount;
+
+      if(this.waterCount > this.seed.getWaterBonus()) {
+         this.waterCount = this.seed.getWaterBonus();
+      }
+   }
+
+   public int getFertilizerCount() {
+      return fertilizerCount;
+   }
+
+   public void setFertilizerCount(int fertilizerCount) {
+      this.fertilizerCount = fertilizerCount;
    }
 }
