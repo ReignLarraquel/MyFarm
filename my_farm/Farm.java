@@ -149,8 +149,9 @@ public class Farm {
                waterBonus = harvestTotal * 0.2 * (tile.getWaterCount() -1);
                finalTotal = harvestTotal + waterBonus;
                farmer.setObjectCoins(farmer.getObjectCoins() + finalTotal);
-               System.out.println("You earned " );
+               System.out.println("You earned " + finalTotal + " coins!");
                
+               farmer.setLevel(farmer.getLevel(), farmer.getExp() + tile.getSeed().getExpEarned());
             }
             else if(tile.getTileState() == "Planted") {
                System.out.println("Your plant is not ready to harvest yet.");
