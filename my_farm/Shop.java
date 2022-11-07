@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Shop {
    private ArrayList<Seeds> seeds;
 
+// This is the constructor of the Shop class. It is initializing the seeds ArrayList and adding the
+// different types of seeds to the ArrayList.
    public Shop() {
       this.seeds = new ArrayList<Seeds>();
 
@@ -20,7 +22,14 @@ public class Shop {
    }
 
    
-   //this method is to buy seeds
+ /**
+  * This function allows the user to buy seeds from the seed store
+  * 
+  * @param farmer the farmer object
+  * @param index the index of the seed in the seeds arraylist
+  * @param farm the farm object
+  * @param currentDay the current day of the game
+  */
    public void buySeeds(Farmer farmer, int index, Farm farm, int currentDay) {
 
 
@@ -29,7 +38,6 @@ public class Shop {
             if (farmer.getObjectCoins() >= seed.getSeedCost()) {
                if (farm.plantSeed(seed, currentDay) == 1){
                farmer.setObjectCoins(farmer.getObjectCoins() - seed.getSeedCost());
-               farmer.setLevel(farmer.getLevel(), farmer.getExp() + seed.getExpEarned());
                farmer.addSeeds(seed);
                System.out.println("You have bought " + seed.getSeedName() + " seeds.");       
                System.out.println("You have planted your " + seed.getSeedName() + " seeds!");           
@@ -45,10 +53,19 @@ public class Shop {
       }
    }
 
+   /**
+    * This function returns the seeds of the current plant
+    * 
+    * @return An ArrayList of Seeds.
+    */
    public ArrayList<Seeds> getSeeds() {
       return this.seeds;
    }
 
+   /**
+    * This function prints out the seeds that are available in the shop
+    *
+    */
    public void displayShop(){
       System.out.println("Welcome to the shop!");
       System.out.println("Here are the seeds you can buy:");

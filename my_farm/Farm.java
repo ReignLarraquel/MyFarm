@@ -14,6 +14,8 @@ public class Farm {
    private static String[][] tiles;
    private static ArrayList<Tiles> tileList;
 
+   // This is the constructor of the Farm class. It initializes the tiles array and the tileList
+   // ArrayList.
    public Farm() {
       Farm.tiles = new String[1][1]; // Change to 5x10 after MCO1
       Farm.tileList = new ArrayList<Tiles>();
@@ -32,6 +34,9 @@ public class Farm {
       // }
    }
 
+/**
+ * It prints out the farm
+ */
    public void displayFarm() {
       System.out.println("\n\t\t" + tiles[0][0]);
 
@@ -50,10 +55,25 @@ public class Farm {
       // System.out.println("\\___________________________________________/");
    }
 
+/**
+ * This function sets the tile at the given x and y coordinates to the given tile.
+ * 
+ * @param x The x coordinate of the tile you want to change.
+ * @param y The y coordinate of the tile to set.
+ * @param tile The tile to be set.
+ */
    public static void setTile(int x, int y, String tile) {
       tiles[x][y] = tile;
    }
 
+/**
+ * This function checks the state of a tile at a given x and y coordinate
+ * 
+ * @param x The x coordinate of the tile you want to check.
+ * @param y The y coordinate of the tile
+ * 
+ * @return The tile state of the tile at the given coordinates.
+ */
    public String checkTileState(int x, int y) {
       for(Tiles tile : tileList) {
          if(tile.getX() == x && tile.getY() == y) {
@@ -63,6 +83,15 @@ public class Farm {
       return null;
    }
 
+/**
+ * This function takes in an x and y coordinate and a tile state, and then it loops through the
+ * tileList and finds the tile that matches the x and y coordinate, and then it changes the tile state
+ * of that tile to the tile state that was passed in
+ * 
+ * @param x The x coordinate of the tile you want to change.
+ * @param y The y coordinate of the tile you want to change.
+ * @param tileState The state of the tile.
+ */
    public static void changeTileState(int x, int y, String tileState) {
       for(Tiles tile : Farm.tileList) {
          if(tile.getX() == x && tile.getY() == y) {
@@ -71,6 +100,14 @@ public class Farm {
       }
    }
 
+   /**
+    * It takes in a seed and the current day, and then plants the seed in the tile the user specifies
+    * 
+    * @param seed The seed that the user wants to plant
+    * @param currentDay The current day of the game
+    * 
+    * @return The method is returning an int.
+    */
    public int plantSeed(Seeds seed, int currentDay) {
       Scanner input = new Scanner(System.in);
       int x;
@@ -96,6 +133,13 @@ public class Farm {
       return 0;
    }
 
+/**
+ * It counts the number of times the plant is watered
+ * 
+ * @param farmer The farmer object that is currently playing the game.
+ * @param x the x coordinate of the tile
+ * @param y The y coordinate of the tile you want to water.
+ */
    public static void waterPlant(Farmer farmer, int x, int y) {
       for(Tiles tile : Farm.tileList) {
          if(tile.getX() == x && tile.getY() == y) {
@@ -110,6 +154,12 @@ public class Farm {
       }
    }
 
+/**
+ * If the current day is the same as the day of harvest, then the tile state is changed to "Must
+ * Harvest" or "Withered" depending on the water count
+ * 
+ * @param currentDay The current day of the game.
+ */
    public void checkHarvestDay(int currentDay) {
       for(Tiles tile : Farm.tileList) {
          if(tile.getTileState() == "Planted") {
@@ -129,6 +179,15 @@ public class Farm {
       }
    }
 
+  /**
+   * The harvestPlant function checks if the tile is ready to be harvested, and if it is, it will
+   * harvest the plant and give the player the coins and experience earned
+   * 
+   * @param farmer The farmer object
+   * @param x x-coordinate of the tile
+   * @param y y-coordinate of the tile
+   * @param currentDay The current day of the game.
+   */
    public void harvestPlant(Farmer farmer, int x, int y, int currentDay) {
       double harvestTotal = 0;
       double finalTotal = 0;

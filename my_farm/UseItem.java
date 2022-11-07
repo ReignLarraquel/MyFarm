@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class UseItem {
    private ArrayList<Tools> tools;
 
+   // A constructor that initializes the tools arraylist and adds the tools to it.
    public UseItem() {
       this.tools = new ArrayList<Tools>();
 
@@ -16,6 +17,15 @@ public class UseItem {
       this.tools.add(new Tools("Shovel", 7, 2));
    }
 
+   /**
+    * The function checks if the tool is in the farmer's inventory, and if it is, it checks if the
+    * farmer has enough coins to use the tool, and if he does, it uses the tool
+    * 
+    * @param farmer the farmer object
+    * @param toolName The name of the tool to be used.
+    * @param x x-coordinate of the tile
+    * @param y the y coordinate of the tile
+    */
    public void use(Farmer farmer, String toolName, int x, int y) {
       for (Tools tool : this.tools) {
          if (toolName == tool.getToolName()) {
@@ -51,6 +61,12 @@ public class UseItem {
       }
    }
 
+   /**
+    * It's a function that allows the user to choose a tool from the tool menu and use it on a tile
+    * 
+    * @param choice the choice of the user in the menu
+    * @param farmer the farmer object
+    */
    public void toolMenu(int choice, Farmer farmer){
       Scanner input = new Scanner(System.in);
       int tool = 0;
@@ -86,10 +102,20 @@ public class UseItem {
       }
    }
 
+   /**
+    * This function returns the tools array list
+    * 
+    * @return An ArrayList of Tools
+    */
    public ArrayList<Tools> getTools() {
       return tools;
    }
 
+   /**
+    * This function sets the tools of the class to the tools passed in
+    * 
+    * @param tools The list of tools that the user has.
+    */
    public void setTools(ArrayList<Tools> tools) {
       this.tools = tools;
    }

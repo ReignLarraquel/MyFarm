@@ -6,6 +6,12 @@ public class Game {
    public static int day;
    public static int gameStatus;
 
+/**
+ * This function is the main menu of the game. It asks the user to choose between starting a new game
+ * or exiting the game
+ * 
+ * @return The gameStatus variable is being returned.
+ */
    public int menu(){
       Scanner input = new Scanner(System.in);
       day = 0;
@@ -16,6 +22,11 @@ public class Game {
       return gameStatus;
    }
 
+/**
+ * This function is used to introduce the player to the game and get their name
+ * 
+ * @return The name of the player.
+ */
    public String monologue(){
       Scanner input = new Scanner(System.in);
       Scanner key = new Scanner(System.in);
@@ -36,6 +47,13 @@ public class Game {
       return name;
    }
 
+/**
+ * This function prints out the header of the game, which includes the farmer's name, the day, the
+ * farmer's level, the farmer's coins, the farmer's experience, and the farm
+ * 
+ * @param farmer the farmer object
+ * @param farm the farm object
+ */
    public void header(Farmer farmer, Farm farm) {
       System.out.println("\n[" + farmer.getName().toUpperCase() + "'s farm]");
       System.out.println("\nDay " + day);
@@ -44,6 +62,11 @@ public class Game {
       farm.displayFarm();
    }
 
+/**
+ * This function prints out the menu options for the player to choose from
+ * 
+ * @return The user's choice.
+ */
    public int footer(){
       Scanner input = new Scanner(System.in);
       int choice = 0;
@@ -53,6 +76,11 @@ public class Game {
       return choice;
    }
    
+/**
+ * This function asks the user if they want to advance to the next day
+ * 
+ * @return The user's input.
+ */
    public int advanceDay(){
       Scanner input = new Scanner(System.in);
       int advanceDay;
@@ -62,7 +90,16 @@ public class Game {
       return advanceDay;
    }
 
-   public int gameOver(Farm farm){
+/**
+ * If all tiles withered it, returns 1. If the number of coins is less than or
+ * equal to 0, return 2. Otherwise, return 0
+ * 
+ * @param farm the farm object
+ * @param farmer the farmer object
+ * 
+ * @return The gameOver method is returning an integer.
+ */
+   public int gameOver(Farm farm, Farmer farmer){
       int withered = 0;
       for(int i = 0; i < 1; i++) {
          for(int j = 0; j < 1; j++) {
@@ -71,21 +108,42 @@ public class Game {
       }
 
       if(withered == 1) return 1;
+      else if(farmer.getObjectCoins() <= 0) return 2;
       return 0;
    }
 
+/**
+ * This function returns the day of the game.
+ * 
+ * @return The day of the game.
+ */
    public int getDay() {
       return day;
    }
 
+/**
+ * This function sets the day to the value of the parameter.
+ * 
+ * @param day The current day of the game.
+ */
    public void setDay(int day) {
       Game.day = day;
    }
 
+/**
+ * > This function returns the value of the gameStatus variable
+ * 
+ * @return The gameStatus variable.
+ */
    public static int getGameStatus() {
       return gameStatus;
    }
 
+/**
+ * This function sets the game status to the value passed in as a parameter
+ * 
+ * @param gameStatus This is the status of the game. 
+ */
    public static void setGameStatus(int gameStatus) {
       Game.gameStatus = gameStatus;
    }
