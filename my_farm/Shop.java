@@ -30,13 +30,13 @@ public class Shop {
   * @param farm the farm object
   * @param currentDay the current day of the game
   */
-   public void buySeeds(Farmer farmer, int index, Farm farm, int currentDay) {
+   public void buySeeds(Game game, Farmer farmer, int index, Farm farm, int currentDay) {
 
 
       for (Seeds seed : this.seeds) {
          if (seeds.get(index) == seed) {
             if (farmer.getObjectCoins() >= seed.getSeedCost()) {
-               if (farm.plantSeed(seed, currentDay) == 1){
+               if (farm.plantSeed(game, seed, currentDay) == 1){
                farmer.setObjectCoins(farmer.getObjectCoins() - seed.getSeedCost());
                farmer.addSeeds(seed);
                System.out.println("You have bought " + seed.getSeedName() + " seeds.");       

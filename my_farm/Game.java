@@ -15,10 +15,14 @@ public class Game {
    public int menu(){
       Scanner input = new Scanner(System.in);
       day = 0;
+      gameStatus = 0;
 
-      System.out.println("Welcome to the Farm!\n");
-      System.out.print("[1] Start a new Game\n[2] Exit Game\n\nEnter your choice: ");
-      gameStatus = input.nextInt();
+      while(checkInput(1, 2, gameStatus)){
+         System.out.println("Welcome to the Farm!\n");
+         System.out.print("[1] Start a new Game\n[2] Exit Game\n\nEnter your choice: ");
+         gameStatus = input.nextInt();
+         if(checkInput(1, 2, gameStatus)) InvalidInput();
+      }
       return gameStatus;
    }
 
@@ -71,8 +75,12 @@ public class Game {
       Scanner input = new Scanner(System.in);
       int choice = 0;
 
-      System.out.println("\nACTION:\n [1]Use Tools\t\t[4]Sleep\n [2]Shop\t\t[5]Exit\n [3]Harvest");
-      choice = input.nextInt();
+      while(checkInput(1, 5, choice)){
+         System.out.println("\nACTION:\n [1]Use Tools\t\t[4]Sleep\n [2]Shop\t\t[5]Exit\n [3]Harvest");
+         choice = input.nextInt();
+         if(checkInput(1, 5, choice)) InvalidInput();         
+      }
+
       return choice;
    }
    
@@ -83,10 +91,14 @@ public class Game {
  */
    public int advanceDay(){
       Scanner input = new Scanner(System.in);
-      int advanceDay;
+      int advanceDay = 0;
 
-      System.out.print("\nAdvance to the next day? \n[1]Yes\n[2]No\n");
-      advanceDay = input.nextInt();
+      while(checkInput(1, 2, advanceDay)){
+            System.out.print("\nAdvance to the next day? \n[1]Yes\n[2]No\n");
+            advanceDay = input.nextInt();
+         if(checkInput(1, 2, advanceDay)) InvalidInput();
+      }
+
       return advanceDay;
    }
 
@@ -110,6 +122,17 @@ public class Game {
       if(withered == 1) return 1;
       else if(farmer.getObjectCoins() <= 0) return 2;
       return 0;
+   }
+
+   public boolean checkInput(int min, int max, int input){
+      while(input < min || input > max){
+         return true;
+      }
+      return false;
+   }
+
+   public void InvalidInput(){
+      System.out.println("Invalid input. Please try again.\n\n");
    }
 
 /**

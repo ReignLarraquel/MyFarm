@@ -108,16 +108,20 @@ public class Farm {
     * 
     * @return The method is returning an int.
     */
-   public int plantSeed(Seeds seed, int currentDay) {
+   public int plantSeed(Game game, Seeds seed, int currentDay) {
       Scanner input = new Scanner(System.in);
-      int x;
-      int y;
+      int x = 10;
+      int y = 10;
 
-      System.out.println("Where would you like to plant your " + seed.getSeedName() + " seeds?");
-      System.out.print("X: ");
-      x = input.nextInt();
-      System.out.print("Y: ");
-      y = input.nextInt();
+      while(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)){
+         System.out.println("Where would you like to plant your " + seed.getSeedName() + " seeds?");
+         System.out.print("X: ");
+         x = input.nextInt();
+         System.out.print("Y: ");
+         y = input.nextInt();         
+         if(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
+      }
+
       if(checkTileState(x, y) == "Plowed") { //Fix to check tileState if plowed
          Farm.setTile(x, y, "[v]");
          Farm.changeTileState(x, y, "Planted");

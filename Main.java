@@ -8,7 +8,7 @@ public class Main {
    public static void main(String[] args) {
       Farm farm = new Farm();
       Farmer farmer;
-      String name;
+      String name = "";
 
       //Setup Map:
       Game game = new Game();
@@ -17,13 +17,14 @@ public class Main {
       int choice = 0;
       int buy = 0;
       int advanceDay = 2;
-      int x;
-      int y;
+      int x = 10;
+      int y = 10;
 
       Scanner input = new Scanner(System.in);
 
       gameStatus = game.menu();
-      farmer = new Farmer(game.monologue());
+      if(gameStatus == 1) name = game.monologue();
+      farmer = new Farmer(name);
 
       while(gameStatus == 1){
          game.setDay(game.getDay() + 1);;
@@ -47,23 +48,30 @@ public class Main {
                choice = game.footer();
                
                if(choice == 1){
-                  useItem.toolMenu(choice, farmer);
+                  useItem.toolMenu(game, choice, farmer);
                   
                   advanceDay = game.advanceDay();
                }
                if(choice == 2){
-                  shop.displayShop();
-                  buy = input.nextInt();
-                  shop.buySeeds(farmer, buy - 1, farm, game.getDay());
+                  while(game.checkInput(1, 1, buy)){
+                     shop.displayShop();
+                     buy = input.nextInt();
+                     if(game.checkInput(1, 1, buy)) game.InvalidInput();
+                  }
+                     shop.buySeeds(game, farmer, buy - 1, farm, game.getDay());
    
                   advanceDay = game.advanceDay();
                }
                if(choice == 3){
-                  System.out.println("Enter the coordinates of the tile you wish to harvest: ");
-                  System.out.print("X: ");
-                  x = input.nextInt();
-                  System.out.print("Y: ");
-                  y = input.nextInt();
+                  while(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)){
+                     System.out.println("Enter the coordinates of the tile you wish to harvest: ");
+                     System.out.print("X: ");
+                     x = input.nextInt();
+                     System.out.print("Y: ");
+                     y = input.nextInt();   
+
+                     if(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
+                  }
    
                   farm.harvestPlant(farmer, x, y, game.getDay());
    

@@ -42,7 +42,7 @@ public class UseItem {
                      Farm.waterPlant(farmer, x, y);
                      break;
                   case "Fertilizer":
-                     Farm.changeTileState(x, y, "Fertilized");
+                     //Add fertilizer code here
                      break;
                   case "Pickaxe":
                      Farm.setTile(x, y, "[ ]");
@@ -67,21 +67,27 @@ public class UseItem {
     * @param choice the choice of the user in the menu
     * @param farmer the farmer object
     */
-   public void toolMenu(int choice, Farmer farmer){
+   public void toolMenu(Game game, int choice, Farmer farmer){
       Scanner input = new Scanner(System.in);
       int tool = 0;
-      int x;
-      int y;
+      int x = 10;
+      int y = 10;
 
-      System.out.println("\nTOOLS:\n [1]Plow\t\t [4]Pickaxe\n [2]Watering Can\t [5]Shovel\n [3]Fertilizer");
-      tool = input.nextInt();
-      
-      System.out.println("\n" + getTools().get(choice - 1).getToolName().toUpperCase());
-      System.out.println("Enter the coordinates of the tile you wish to use the tool: ");
-      System.out.print("X: ");
-      x = input.nextInt();
-      System.out.print("Y: ");
-      y = input.nextInt();
+      while(game.checkInput(1, 5, tool)){
+         System.out.println("\nTOOLS:\n [1]Plow\t\t [4]Pickaxe\n [2]Watering Can\t [5]Shovel\n [3]Fertilizer");
+         tool = input.nextInt();      
+         if(game.checkInput(1, 5, tool)) game.InvalidInput();
+      }
+
+      while(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)){
+         System.out.println("\n" + getTools().get(choice - 1).getToolName().toUpperCase());
+         System.out.println("Enter the coordinates of the tile you wish to use the tool: ");
+         System.out.print("X: ");
+         x = input.nextInt();
+         System.out.print("Y: ");
+         y = input.nextInt();
+         if(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
+      }
 
       switch(tool){
          case 1:
