@@ -15,7 +15,7 @@ public class Seeds {
    private int produceMin;
    private int produceMax;
 
-// A constructor without produceMax.
+// A constructor with produceMax.
    public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, double seedCost, int basePrice, double expEarned, int produceMin, int produceMax) {
       this.seedName = seedName;
       this.cropType = cropType;
@@ -31,7 +31,7 @@ public class Seeds {
       this.produceMax = produceMax;
    }
 
-// A constructor with produceMax.
+// A constructor without produceMax.
    public Seeds(String seedName, String cropType, int harvestTime, int waterNeed, int waterBonus, int fertilizerNeed, int fertilizerBonus, double seedCost, int basePrice, double expEarned, int produceMin) {
       this.seedName = seedName;
       this.cropType = cropType;
