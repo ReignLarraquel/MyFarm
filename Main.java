@@ -2,8 +2,6 @@ import my_farm.*;
 import java.util.Scanner;
 
 public class Main {
-   public static int gameStatus = 0;
-   public static int day = 0;
 
    public static void main(String[] args) {
       Farm farm = new Farm();
@@ -14,6 +12,7 @@ public class Main {
       Game game = new Game();
       Shop shop = new Shop();
       UseItem useItem = new UseItem();
+      int gameStatus = 0;
       int choice = 0;
       int buy = 0;
       int advanceDay = 2;
