@@ -17,42 +17,51 @@ public class Farm {
    // This is the constructor of the Farm class. It initializes the tiles array and the tileList
    // ArrayList.
    public Farm() {
-      Farm.tiles = new String[1][1]; // Change to 5x10 after MCO1
+      Farm.tiles = new String[5][10]; 
       Farm.tileList = new ArrayList<Tiles>();
 
-      //Remove after MCO1
-      tiles[0][0] = "[ ]";
-      tileList.add(new Tiles(0, 0, "Unplowed"));
+      Farm.tiles = new String[5][10];
+      for(int i = 0; i < 5; i++) {
+         for(int j = 0; j < 10; j++) {
+            tiles[i][j] = "[ ]";
+            tileList.add(new Tiles(i, j, "Unplowed"));
+         }
+      }
 
-      //Uncomment after MCO1
-      // Farm.tiles = new String[5][10];
-      // for(int i = 0; i < 5; i++) {
-      //    for(int j = 0; j < 10; j++) {
-      //       tiles[i][j] = "[ ]";
-      //       tileList.add(new Tiles(i, j, "Unplowed"));
-      //    }
-      // }
+      generateRocks();
    }
 
 /**
  * It prints out the farm
  */
    public void displayFarm() {
-      System.out.println("\n\t\t" + tiles[0][0]);
+      System.out.println(" ___________________________________________");
+      System.out.println("/                                           \\");
 
-      // Uncomment once MCO1 is complete
-      // System.out.println(" ___________________________________________");
-      // System.out.println("/                                           \\");
+      for(int i = 0; i < 5; i++) {
+         System.out.print("|  ");
+         for(int j = 0; j < 10; j++) {
+            System.out.print(tiles[i][j] + " ");
+         }
+         System.out.print(" |");
+         System.out.println();
+      }
+      System.out.println("\\___________________________________________/");
+   }
 
-      // for(int i = 0; i < 5; i++) {
-      //    System.out.print("|  ");
-      //    for(int j = 0; j < 10; j++) {
-      //       System.out.print(tiles[i][j] + " ");
-      //    }
-      //    System.out.print(" |");
-      //    System.out.println();
-      // }
-      // System.out.println("\\___________________________________________/");
+   public void generateRocks() {
+      int rockCount = (int)Math.floor(Math.random() * ( 30 - 10 + 1) + 10);
+      int i = 0;
+
+      while(i <= rockCount) {
+         int x = (int)Math.floor(Math.random() * 5);
+         int y = (int)Math.floor(Math.random() * 10);
+         if(checkTileState(x, y) == "Unplowed") {
+            setTile(x, y, "[¤]");
+            changeTileState(x, y, "rock");
+            i++;
+         }
+      }
    }
 
 /**
@@ -113,13 +122,13 @@ public class Farm {
       int x = 10;
       int y = 10;
 
-      while(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)){
+      while(Tiles.isTileExist(x, y) == false){
          System.out.println("Where would you like to plant your " + seed.getSeedName() + " seeds?");
          System.out.print("X: ");
          x = input.nextInt();
          System.out.print("Y: ");
          y = input.nextInt();         
-         if(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
+         if(Tiles.isTileExist(x, y) == false) System.out.println("Coordinates does not exist. Try again.\n\n");
       }
 
       if(checkTileState(x, y) == "Plowed") { //Fix to check tileState if plowed
@@ -228,5 +237,10 @@ public class Farm {
          }
       }
    }
+
+   public static ArrayList<Tiles> getTileList() {
+      return tileList;
+   }
+
    
 }
