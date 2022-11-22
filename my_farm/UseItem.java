@@ -39,7 +39,7 @@ public class UseItem {
                      Farm.changeTileState(x, y, "Plowed");
                      break;
                   case "Watering Can":
-                     Farm.waterPlant(farmer, x, y);
+                     waterPlant(farmer, x, y);
                      break;
                   case "Fertilizer":
                      //Add fertilizer code here
@@ -79,14 +79,14 @@ public class UseItem {
          if(game.checkInput(1, 5, tool)) game.InvalidInput();
       }
 
-      while(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)){
+      while(game.checkInput(0, 4, x) || game.checkInput(0, 9, y)){
          System.out.println("\n" + getTools().get(choice - 1).getToolName().toUpperCase());
          System.out.println("Enter the coordinates of the tile you wish to use the tool: ");
          System.out.print("X: ");
          x = input.nextInt();
          System.out.print("Y: ");
          y = input.nextInt();
-         if(game.checkInput(0, 0, x) || game.checkInput(0, 0, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
+         if(game.checkInput(0, 4, x) || game.checkInput(0, 9, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
       }
 
       switch(tool){
@@ -108,6 +108,27 @@ public class UseItem {
       }
    }
 
+      /**
+    * It counts the number of times the plant is watered
+    * 
+    * @param farmer The farmer object that is currently playing the game.
+    * @param x the x coordinate of the tile
+    * @param y The y coordinate of the tile you want to water.
+    */
+   public static void waterPlant(Farmer farmer, int x, int y) {
+      for(Tiles tile : Farm.getTileList()) {
+         if(tile.getX() == x && tile.getY() == y) {
+            if(tile.getTileState() == "Planted") {
+               tile.setWaterCount(1);
+               System.out.println("You watered the plant " + tile.getWaterCount() + " times.");
+            } else {
+               System.out.println("There is no plant to water.");
+            }
+
+         }
+      }
+   }  
+      
    /**
     * This function returns the tools array list
     * 

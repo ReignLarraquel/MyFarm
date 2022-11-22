@@ -122,13 +122,13 @@ public class Farm {
       int x = 10;
       int y = 10;
 
-      while(Tiles.isTileExist(x, y) == false){
+      while(game.checkInput(0, 4, x) || game.checkInput(0, 9, y)){
          System.out.println("Where would you like to plant your " + seed.getSeedName() + " seeds?");
          System.out.print("X: ");
          x = input.nextInt();
          System.out.print("Y: ");
          y = input.nextInt();         
-         if(Tiles.isTileExist(x, y) == false) System.out.println("Coordinates does not exist. Try again.\n\n");
+         if(game.checkInput(0, 4, x) || game.checkInput(0, 9, y)) System.out.println("Coordinates does not exist. Try again.\n\n");
       }
 
       if(checkTileState(x, y) == "Plowed") { //Fix to check tileState if plowed
@@ -144,27 +144,6 @@ public class Farm {
       }
 
       return 0;
-   }
-
-/**
- * It counts the number of times the plant is watered
- * 
- * @param farmer The farmer object that is currently playing the game.
- * @param x the x coordinate of the tile
- * @param y The y coordinate of the tile you want to water.
- */
-   public static void waterPlant(Farmer farmer, int x, int y) {
-      for(Tiles tile : Farm.tileList) {
-         if(tile.getX() == x && tile.getY() == y) {
-            if(tile.getTileState() == "Planted") {
-               tile.setWaterCount(1);
-               System.out.println("You watered the plant " + tile.getWaterCount() + " times.");
-            } else {
-               System.out.println("There is no plant to water.");
-            }
-
-         }
-      }
    }
 
 /**
@@ -233,6 +212,9 @@ public class Farm {
             }
             else if(tile.getTileState() == "Plowed" || tile.getTileState() == "Unplowed") {
                System.out.println("There is no plant to harvest.");
+            }
+            else if(tile.getTileState() == "Rock") {
+               System.out.println("There is a rock here.");
             }
          }
       }
