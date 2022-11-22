@@ -11,14 +11,14 @@ public class Shop {
       this.seeds = new ArrayList<Seeds>();
 
       this.seeds.add(new Seeds("Turnip", "Root crop", 2, 1, 2, 0, 1, 5.0, 6, 5, 1, 2));
-      // this.seeds.add(new Seeds("Carrot", "Root crop", 3, 1, 2, 0, 1, 10, 9, 7.5, 1, 2));
-      // this.seeds.add(new Seeds("Potato", "Root crop", 5, 3, 4, 1, 2, 20, 3, 12.5, 1, 10));
-      // this.seeds.add(new Seeds("Rose", "Flower", 1, 1, 2, 0, 1, 5, 5, 2.5, 1));
-      // this.seeds.add(new Seeds("Tulips", "Flower", 2, 2, 3, 0, 1, 10, 9, 5, 1));
-      // this.seeds.add(new Seeds("", "", 0, 0, 0, 0, 0, 0, 0, 0, 0));
-      // this.seeds.add(new Seeds("Sunflower", "Flower", 3, 2, 3, 1, 2, 20, 19, 7.5, 1));
-      // this.seeds.add(new Seeds("Mango", "Fruit tree", 10, 7, 7, 4, 4, 100, 8, 25, 5, 15));
-      // this.seeds.add(new Seeds("Apple", "Fruit tree", 10, 7, 7, 5, 5, 200, 5, 25, 10, 15));
+      this.seeds.add(new Seeds("Carrot", "Root crop", 3, 1, 2, 0, 1, 10, 9, 7.5, 1, 2));
+      this.seeds.add(new Seeds("Potato", "Root crop", 5, 3, 4, 1, 2, 20, 3, 12.5, 1, 10));
+      this.seeds.add(new Seeds("Rose", "Flower", 1, 1, 2, 0, 1, 5, 5, 2.5, 1));
+      this.seeds.add(new Seeds("Tulips", "Flower", 2, 2, 3, 0, 1, 10, 9, 5, 1));
+      this.seeds.add(new Seeds("", "", 0, 0, 0, 0, 0, 0, 0, 0, 0));
+      this.seeds.add(new Seeds("Sunflower", "Flower", 3, 2, 3, 1, 2, 20, 19, 7.5, 1));
+      this.seeds.add(new Seeds("Mango", "Fruit tree", 10, 7, 7, 4, 4, 100, 8, 25, 5, 15));
+      this.seeds.add(new Seeds("Apple", "Fruit tree", 10, 7, 7, 5, 5, 200, 5, 25, 10, 15));
    }
 
    
