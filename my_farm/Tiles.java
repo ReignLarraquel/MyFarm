@@ -1,4 +1,15 @@
 package my_farm;
+
+/*
+ * Tile States:
+ * Plow:          [_]
+ * Unplowed:      [ ]
+ * Rock:          [¤]
+ * Planted:       [v]
+ * Must Harvest:  [Y]
+ * Withered:      […]
+*/
+
 public class Tiles {
    private int x;
    private int y;
@@ -148,6 +159,10 @@ public class Tiles {
     * @param fertilizerCount The number of fertilizer items the player has.
     */
    public void setFertilizerCount(int fertilizerCount) {
-      this.fertilizerCount = fertilizerCount;
+      this.fertilizerCount += fertilizerCount;
+
+      if(this.fertilizerCount > this.seed.getFertilizerBonus()) {
+         this.fertilizerCount = this.seed.getFertilizerBonus();
+      }
    }
 }
