@@ -53,7 +53,7 @@ public class Seeds {
     * @return A random number between the produceMin and produceMax
     */
    public int generateProduce() {
-      return (int) (Math.random() * (this.produceMax - this.produceMin + 1) + this.produceMin);
+      return (int) Math.floor((Math.random() * (this.produceMax - this.produceMin + 1) + this.produceMin));
    }  
 
    /**
